@@ -9,7 +9,7 @@ props = list(csv.columns.values)
 props = [p for p in props if p not in ["Longitude",
                                        "Latitude"]]
 
-geojson = []
+features = []
 for row in csv.iterrows():
     accession = row[1]
     feature = {
@@ -23,7 +23,9 @@ for row in csv.iterrows():
     # automatically populate accession properties
     feature_props = {p: accession[p] for p in props}
     feature["properties"] = feature_props
-    geojson.append(feature)
+    features.append(feature)
+feature_collection = {"type": "FeatureCollection",
+                      "features": features}
 
 with open("accession_locations.json", "w") as f:
-    json.dump(geojson, f)
+    json.dump(feature_collection, f)
