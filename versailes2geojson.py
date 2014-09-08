@@ -19,7 +19,7 @@ for row in csv.iterrows():
     feature_props = {p: accession[p] for p in props}
 
     f = Feature(
-            geometry = Point((lat,lon))
+            geometry = Point((lon,lat))
         )
 
     features.append(f)
